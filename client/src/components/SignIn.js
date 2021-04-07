@@ -6,8 +6,6 @@ import { Link, useHistory } from "react-router-dom";
 export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const nameRef = useRef();
-  const usernameRef = useRef();
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,20 +15,20 @@ export default function SignIn() {
     e.preventDefault();
     try {
       setError("");
-      setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      setLoading(true);
       history.push("/");
     } catch {
+      setLoading(false);
       setError("Failed to create an account");
     }
-    setLoading(false);
   }
 
   return (
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Sign In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -48,7 +46,7 @@ export default function SignIn() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
+        Need an account? <Link to="/signUp">Sign Up</Link>
       </div>
     </>
   );

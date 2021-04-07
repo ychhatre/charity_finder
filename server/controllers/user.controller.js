@@ -60,7 +60,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const result = await pool.query("DELETE FROM users WHERE username=$1 RETURNING *", [req.params.uid]);
+    const result = await pool.query("DELETE FROM users WHERE uid=$1 RETURNING *", [req.params.uid]);
     console.log(result.fields); 
     return res.status(201).send({"status": result})
   } catch (error) {
@@ -69,17 +69,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const loginUser = async(req,res) => {
-    const { email, password } = req.body; 
-    const user = (await pool.query("SELECT * FROM users WHERE email=$1", [email])).rows[0]
-    if(!user) {
-      return res.status(502).send({err: "User not found with specified email"})
-    } else {
-      if(user.password === password) {
-        return res.status(201).send(user); 
-      } else {
-        return res.status(502).send({err: "Incorrect password, please try again"})
-      }
-    }
-}
-module.exports = { createUser, getAllUsers, getSingleUser, updateUser, deleteUser, loginUser};
+module.exports = { createUser, getAllUsers, getSingleUser, updateUser, deleteUser};

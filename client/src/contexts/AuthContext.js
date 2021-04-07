@@ -10,9 +10,11 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  const login = (email,password) => {
+
+  const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
+
   const signUp = async (email, password, username, displayName) => {
     try {
       const uid = await (
@@ -45,7 +47,7 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
-  
+
   const value = {
     currentUser,
     login,

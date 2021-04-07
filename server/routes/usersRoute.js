@@ -8,5 +8,4 @@ userRouter.get("/:uid", userController.getSingleUser)
 userRouter.post("/", userController.createUser)
 userRouter.patch("/:uid", userController.updateUser)
 userRouter.delete("/:uid", userController.deleteUser)
-userRouter.post("/login",userController.loginUser); 
 module.exports = userRouter; 

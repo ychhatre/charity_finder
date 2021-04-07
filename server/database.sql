@@ -8,3 +8,16 @@ CREATE TABLE users(
     email VARCHAR(255) UNIQUE
 ); 
 
+CREATE TABLE charities(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    image VARCHAR(255)
+)
+
+CREATE TABLE members(
+    id INT PRIMARY KEY NOT NULL UNIQUE,
+    charity_id INT PRIMARY KEY NOT NULL 
+)
+
